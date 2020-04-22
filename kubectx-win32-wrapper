@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+set -e
+
+: ${KUBECTX_IGNORE_FZF:=1}
+export KUBECTX_IGNORE_FZF
+
+self="$0"
+cwd=${0%/*}
+wrapper=${0##*/}
+delegate=${wrapper%-win32-wrapper}
+
+test -x "$cwd/$delegate"
+
+"$cwd/$delegate" "$@"
